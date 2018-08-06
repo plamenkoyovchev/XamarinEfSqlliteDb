@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.IO;
 using TestEFSqLiteOnXamarin.Persistance.Entities;
@@ -11,6 +13,10 @@ namespace TestEFSqLiteOnXamarin.Persistance
 
         public DbSet<Person> Persons { get; set; }
 
+        public DbSet<Address> Address { get; set; }
+
+        public DbSet<Car> Cars { get; set; }
+
         public DatabaseContext()
         {
             dbPath = GetDatabasePath();
@@ -20,6 +26,47 @@ namespace TestEFSqLiteOnXamarin.Persistance
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlite($"Data Source={dbPath}");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            SeedInitialData(modelBuilder);
+        }
+
+        private void SeedInitialData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Address>().HasData(
+                    new Address()
+                    {
+                        Id = 2,
+                        Street = "Braziliano",
+                        No = 9
+                    },
+                     new Address()
+                     {
+                         Id = 3,
+                         Street = "Senegaliano",
+                         No = 10
+                     });
+
+            modelBuilder.Entity<Person>().HasData(
+                new Person()
+                {
+                    Id = 2,
+                    Name = "Robert Firmino",
+                    Age = 23,
+                    AddressId = 2
+                },
+                new Person()
+                {
+                    Id = 3,
+                    Name = "Sadio Mane",
+                    Age = 25,
+                    AddressId = 3
+                });
+
+            modelBuilder.Entity<Car>().HasData(new Car() { Id = 1, Make = "Audi", Model = "RS3" });
         }
 
         private string GetDatabasePath()
