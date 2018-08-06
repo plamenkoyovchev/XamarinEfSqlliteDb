@@ -37,7 +37,7 @@ namespace TestEFSqLiteOnXamarin
         private void InitializeDatabase()
         {
             SQLitePCL.Batteries.Init();
-            using(var db = new DatabaseContext())
+            using(var db = DbConnection.Instance.DbContext)
             {
                 db.Database.EnsureCreated();
                 db.Database.Migrate();
