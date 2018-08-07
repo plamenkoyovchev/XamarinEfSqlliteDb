@@ -39,6 +39,8 @@ namespace TestEFSqLiteOnXamarin.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("HP");
+
                     b.Property<string>("Make");
 
                     b.Property<string>("Model");
@@ -48,7 +50,7 @@ namespace TestEFSqLiteOnXamarin.Migrations.Migrations
                     b.ToTable("Cars");
 
                     b.HasData(
-                        new { Id = 1, Make = "Audi", Model = "RS3" }
+                        new { Id = 1, HP = 0, Make = "Audi", Model = "RS3" }
                     );
                 });
 
