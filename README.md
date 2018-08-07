@@ -1,5 +1,5 @@
 # XamarinEfSqlliteDb
-This demo project is showing how to create SqlLite database with EntityFramework Core and Xamarin.Forms application
+This demo project is showing how to create Sqlite database with EntityFramework Core and Xamarin.Forms application
 
 # Enable migrations
 1. Create .NET Core console app and install Microsoft.EntityFrameworkCore, Microsoft.EntityFrameworkCore.Tools, Microsoft.EntityFrameworkCore.Sqlite packages from NuGet.
